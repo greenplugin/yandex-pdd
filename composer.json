@@ -1,0 +1,31 @@
+{
+    "name": "dobro/yandex-pdd",
+    "type": "library",
+    "description": "This is simple way to use yandex pdd api",
+    "keywords": ["yandex", "pdd", "rest", "api", "yandex api", "pdd client", "yandex dns"],
+    "homepage": "https://github.com/Greenplugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "GreenPlugin",
+            "email": "PMDK@yandex.ru"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.0"
+    },
+    "autoload": {
+       "psr-4": {
+            "YandexPDD\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "YandexPDD\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "RC"
+}
