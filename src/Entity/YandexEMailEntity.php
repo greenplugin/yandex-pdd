@@ -8,6 +8,10 @@
 
 namespace YandexPDD\Entity;
 
+/**
+ * Class YandexEMailEntity
+ * @package YandexPDD\Entity
+ */
 class YandexEMailEntity implements SerializableInterface
 {
 	

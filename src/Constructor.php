@@ -51,7 +51,7 @@ class Constructor
 	 *
 	 * @return DomainManager
 	 */
-	public function domainManager($domain = '')
+	public function DomainManager($domain = '')
 	{
 		$manager                = new DomainManager($this->key, $domain);
 		$this->domainManagers[] = $manager;
@@ -64,7 +64,7 @@ class Constructor
 	 *
 	 * @return DNSManager
 	 */
-	public function dnsManager($domain)
+	public function DNSManager($domain)
 	{
 		$manager             = new DNSManager($this->key, $domain);
 		$this->DNSManagers[] = $manager;
@@ -77,7 +77,7 @@ class Constructor
 	 *
 	 * @return MailManager
 	 */
-	public function mailManager($domain)
+	public function MailManager($domain)
 	{
 		$manager              = new MailManager($this->key, $domain);
 		$this->mailManagers[] = $manager;

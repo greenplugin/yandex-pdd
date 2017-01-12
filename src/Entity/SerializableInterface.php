@@ -8,7 +8,10 @@
 
 namespace YandexPDD\Entity;
 
-
+/**
+ * Interface SerializableInterface
+ * @package YandexPDD\Entity
+ */
 interface SerializableInterface
 {
 	/**

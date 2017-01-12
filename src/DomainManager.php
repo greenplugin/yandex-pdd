@@ -7,13 +7,20 @@
  */
 
 namespace YandexPDD;
+use YandexPDD\Entity\DomainCollectionResponse;
+use YandexPDD\Entity\DomainConnectionResponse;
+use YandexPDD\Entity\DomainCountryResponse;
+use YandexPDD\Entity\DomainDetailsResponse;
+use YandexPDD\Entity\DomainLogoResponse;
+use YandexPDD\Entity\DomainStatusResponse;
+use YandexPDD\Entity\SimpleResponse;
 
 
 /**
  * Class DomainManager
  * @package YandexPDD
  */
-class DomainManager extends BaseManager
+class DomainManager extends AbstractBaseManager
 {
 	// TODO [GreenPlugin]: fill all responses to self;
 	// TODO [GreenPlugin]: fix setDomainLogo method
@@ -22,25 +29,34 @@ class DomainManager extends BaseManager
 	/**
 	 * @param int $page  = 1
 	 * @param int $count = 20
+	 * @param string $direction = asc
 	 *
-	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 * @return DomainCollectionResponse
 	 */
-	public function get($page = 1, $count = 20)
+	public function get($page = 1, $count = 20, $direction = 'asc')
 	{
-		return $this->getQuery(sprintf("%s/domains?page=%d&on_page=%d", self::HOST, $page, $count));
+		return $this->getQuery(sprintf(
+			"%s/domains?page=%d&on_page=%d&direction=%s",
+			self::HOST, 
+			$page, 
+			$count, 
+			$direction),
+            new DomainCollectionResponse()
+		);
 	}
 	
 	/**
 	 * @param string $domain
 	 *
-	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 * @return DomainConnectionResponse
 	 */
 	public function register($domain = null)
 	{
 		$domain = $domain ? $domain : $this->domain;
 		return $this->postQuery(
 			sprintf("%s/register", self::HOST),
-			['domain' => $domain]
+			['domain' => $domain],
+			new DomainConnectionResponse()
 		);
 	}
 	
@@ -54,38 +70,46 @@ class DomainManager extends BaseManager
 		$domain = $domain ? $domain : $this->domain;
 		return $this->postQuery(
 			sprintf("%s/delete", self::HOST),
-			['domain' => $domain]
+			['domain' => $domain],
+			new SimpleResponse()
 		);
 	}
 	
 	/**
 	 * @param string $domain
 	 *
-	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 * @return null|DomainStatusResponse
 	 */
 	public function getStatus($domain = null)
 	{
-		return $this->getQuery(sprintf("%s/registration_status?domain=%s", self::HOST, $domain));
+		$domain = $domain ? $domain : $this->domain;
+		return $this->getQuery(
+			sprintf("%s/registration_status?domain=%s", self::HOST, $domain),
+			new DomainStatusResponse()
+		);
 	}
 	
 	/**
 	 * @param string $domain
 	 *
-	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 * @return DomainDetailsResponse|null
 	 */
 	public function getDetails($domain = null)
 	{
 		$domain = $domain ? $domain : $this->domain;
-		return $this->getQuery(sprintf("%s/details?domain=%s", self::HOST, $domain));
+		return $this->getQuery(
+			sprintf("%s/details?domain=%s", self::HOST, $domain),
+			new DomainDetailsResponse()
+		);
 	}
 	
 	/**
 	 * @param string $country in ISO-3166-1 https://ru.wikipedia.org/wiki/ISO_3166-1
 	 * @param string $domain
 	 *
-	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 * @return DomainCountryResponse|null
 	 */
-	public function setDomainCountry($country, $domain = null)
+	public function setCountry($country, $domain = null)
 	{
 		$domain = $domain ? $domain : $this->domain;
 		return $this->postQuery(
@@ -93,41 +117,47 @@ class DomainManager extends BaseManager
 			[
 				'domain' => $domain,
 				'country' => $country
-			]
+			],
+			new DomainCountryResponse()
 		);
 	}
 	
 	/**
 	 * @param string $domain
-	 * @param string $filename
+	 * @param string $path
 	 *
 	 * @return mixed|\Psr\Http\Message\ResponseInterface
 	 */
-//	public function setDomainLogo($domain, $filename)
-//	{
-//		$client = $this->getClient();
-//		$file = Storage::get($filename);
-//		return $client->request(
-//		'POST',
-//		sprintf("%s/logo/set", self::HOST),
-//		[
-//			'multipart' => [
-//				['domain'=> $domain],
-//				[
-//					'name'     => 'file',
-//					'filename' => 'logo',
-//					'contents' => $file,
-//					'headers'  => [
-//						'Content-Type' => 'image/jpeg',
-//					],
-//				]
-//
-//			],
-//			'headers'     => ['PddToken' => config('yandex_api.key')],
-//			'http_errors' => config('app.debug'),
-//		]
-//		);
-//	}
+	public function setDomainLogo($path, $domain = null)
+	{
+		$domain = $domain ? $domain : $this->domain;
+		$mime = mime_content_type($path);
+		$file = file_get_contents($path);
+		$result = $this->client->request(
+		'POST',
+		sprintf("%s/logo/set", self::HOST),
+		[
+			'multipart' => [
+				[
+					'name'=> 'domain',
+					'contents' => $domain
+				],
+				[
+					'name'     => 'file',
+					'filename' => 'logo',
+					'contents' => $file,
+					'headers'  => [
+						'Content-Type' => $mime,
+					],
+				]
+
+			],
+			'headers'     => ['PddToken' => $this->apiKey],
+			'http_errors' => $this->debug,
+		]
+		);
+		return $this->processResponse($result, new SimpleResponse());
+	}
 	
 	/**
 	 * @param string $domain
@@ -137,7 +167,7 @@ class DomainManager extends BaseManager
 	public function getDomainLogo($domain = null)
 	{
 		$domain = $domain ? $domain : $this->domain;
-		return $this->getQuery(sprintf("%s/logo/check?domain=%s", self::HOST, $domain));
+		return $this->getQuery(sprintf("%s/logo/check?domain=%s", self::HOST, $domain), new DomainLogoResponse());
 	}
 	
 	/**
@@ -148,7 +178,14 @@ class DomainManager extends BaseManager
 	public function removeDomainLogo($domain = null)
 	{
 		$domain = $domain ? $domain : $this->domain;
-		return $this->postQuery(sprintf("%s/logo/del", self::HOST), ['domain' => $domain]);
+		return $this->postQuery(sprintf("%s/logo/del", self::HOST), ['domain' => $domain], new SimpleResponse());
 	}
 	
+	/**
+	 * @return null|DomainCollectionResponse|DomainConnectionResponse
+	 */
+	public function getResponse()
+	{
+		return $this->response;
+	}
 }

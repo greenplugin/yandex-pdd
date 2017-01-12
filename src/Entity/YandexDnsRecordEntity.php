@@ -8,6 +8,10 @@
 
 namespace YandexPDD\Entity;
 
+/**
+ * Class YandexDnsRecordEntity
+ * @package YandexPDD\Entity
+ */
 class YandexDnsRecordEntity implements SerializableInterface
 {
 	const
