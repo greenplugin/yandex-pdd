@@ -25,7 +25,7 @@ class DomainManagerTest extends \PHPUnit_Framework_TestCase
 		$domain = $argv[3];
 
 		$pdd = new Constructor($key);
-		$dm = $pdd->DomainManager($domain);
+		$dm = $pdd->getDomainManager($domain);
 		var_dump($dm->get());
 //		var_dump($dm->register());
 //		var_dump($dm->getError());
