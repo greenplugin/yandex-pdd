@@ -36,7 +36,6 @@ class DNSCollectionResponse extends AbstractYandexResponse
 		return $this->records;
 	}
 	
-	
 	/**
 	 * @param Object|array $data
 	 *

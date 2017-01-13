@@ -10,9 +10,6 @@
 namespace YandexPDD\Tests;
 
 use YandexPDD\Constructor;
-use YandexPDD\DNSManager;
-use YandexPDD\DomainManager;
-use YandexPDD\MailManager;
 
 class ConstructorTest extends \PHPUnit_Framework_TestCase
 {
@@ -28,11 +25,6 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testPower($class)
 	{
-		global $argv, $argc;
-		$this->assertGreaterThan(3, $argc, 'use with key and domain');
-		$this->key = $argv[2];
-		$this->domain = $argv[3];
-		
 		$constructor = new Constructor($this->key);
 		$result = call_user_func([$constructor, $class], $this->domain);
 		var_dump($result, true);
@@ -41,9 +33,9 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
 	public function testProvider()
 	{
 		return [
-			['DNSManager'],
-			['DomainManager'],
-			['MailManager'],
+			['getDNSManager'],
+			['getDomainManager'],
+			['getMailManager'],
 		];
 	}
 	
