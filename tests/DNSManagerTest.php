@@ -26,15 +26,15 @@ class DNSManagerTest extends \PHPUnit_Framework_TestCase
 		$domain = $argv[3];
 
 		$pdd = new Constructor($key);
-		
+
 		$dm = $pdd->getDNSManager($domain);
 		$records = $dm->getRecords();
-		
+
 		echo "\n";
 		foreach($records->getRecords() as $record){
 			echo $record->getType() . ' | ' . $record->getFqdn() . ' = ' . $record->getContent() ."\n";
 		}
-			
+
 		//$dm = $pdd->getDNSManager($domain);
 		//$id = $dm->getRecords()->findBySubDomain('ftp')->getRecordId();
 			
