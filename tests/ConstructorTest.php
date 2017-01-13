@@ -19,14 +19,14 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
 	protected $domain;
 	
 	/**
-	 * @param $class
+	 * @param  $class
 	 *
-	 * @dataProvider testProvider
+	 * @dataProvider  testProvider
 	 */
 	public function testPower($class)
 	{
-		$constructor = new Constructor($this->key);
-		$result = call_user_func([$constructor, $class], $this->domain);
+		$constructor = new Constructor('empty_key');
+		$result = call_user_func([$constructor, $class], 'domain.com');
 		var_dump($result, true);
 	}
 	
