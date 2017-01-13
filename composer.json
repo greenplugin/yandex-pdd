@@ -1,5 +1,5 @@
 {
-    "name": "dobro/yandex-pdd",
+    "name": "GreenPlugin/yandex-pdd",
     "type": "library",
     "description": "This is simple way to use yandex pdd api",
     "keywords": ["yandex", "pdd", "rest", "api", "yandex api", "pdd client", "yandex dns"],

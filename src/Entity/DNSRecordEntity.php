@@ -9,10 +9,10 @@
 namespace YandexPDD\Entity;
 
 /**
- * Class YandexDnsRecordEntity
+ * Class DnsRecordEntity
  * @package YandexPDD\Entity
  */
-class YandexDnsRecordEntity implements SerializableInterface
+class DNSRecordEntity implements SerializableInterface
 {
 	const
 		TYPE_SRV = 'SRV',
@@ -99,7 +99,6 @@ class YandexDnsRecordEntity implements SerializableInterface
 	 */
 	private $record_id = null;
 	
-	
 	/**
 	 * @return null|string
 	 */
@@ -111,7 +110,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param null|string $domain
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setDomain($domain)
 	{
@@ -131,7 +130,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param string $type
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setType($type)
 	{
@@ -151,7 +150,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param null|string $admin_mail
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setAdminMail($admin_mail)
 	{
@@ -171,7 +170,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param null|string $content
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setContent($content)
 	{
@@ -191,7 +190,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param null|string $priority
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setPriority($priority)
 	{
@@ -211,7 +210,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param null|string $weight
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setWeight($weight)
 	{
@@ -231,7 +230,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param null|string $port
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setPort($port)
 	{
@@ -251,7 +250,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param null|string $target
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setTarget($target)
 	{
@@ -271,7 +270,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param null|string $subdomain
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setSubdomain($subdomain)
 	{
@@ -291,7 +290,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param int $ttl
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setTtl($ttl)
 	{
@@ -311,7 +310,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param int|null $refresh
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setRefresh($refresh)
 	{
@@ -331,7 +330,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param int|null $retry
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setRetry($retry)
 	{
@@ -351,7 +350,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param int|null $expire
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setExpire($expire)
 	{
@@ -371,7 +370,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param int|null $neg_cache
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setNegCache($neg_cache)
 	{
@@ -391,7 +390,7 @@ class YandexDnsRecordEntity implements SerializableInterface
 	/**
 	 * @param int|null $record_id
 	 *
-	 * @return YandexDnsRecordEntity
+	 * @return DNSRecordEntity
 	 */
 	public function setRecordId($record_id)
 	{
@@ -417,4 +416,8 @@ class YandexDnsRecordEntity implements SerializableInterface
 	private function isVar($var){
 		return ($var === null) ? false : true;
 	}
+	
 }
+
+
+      

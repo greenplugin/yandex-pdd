@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: dobro
+ * User: GreenPlugin
  * Date: 12.01.17
  * Time: 12:43
  */
@@ -34,7 +34,7 @@ class DomainManagerTest extends \PHPUnit_Framework_TestCase
 //		var_dump($dm->remove());
 //		var_dump($dm->setCountry(CountryInterface::COUNTRY_KZ)->isSuccess());
 //		var_dump($dm->getError());
-//		var_dump($dm->setDomainLogo('/home/dobro/Рабочий стол/logo.png'));
+//		var_dump($dm->setDomainLogo('/home/GreenPlugin/Рабочий стол/logo.png'));
 //		var_dump($dm->getDomainLogo());
 //		var_dump($dm->removeDomainLogo());
 	}

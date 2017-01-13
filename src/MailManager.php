@@ -8,7 +8,7 @@
 
 namespace YandexPDD;
 
-use YandexPDD\Entity\YandexEMailEntity;
+use YandexPDD\Entity\EMailEntity;
 
 class MailManager extends  BaseManager
 {
@@ -52,11 +52,11 @@ class MailManager extends  BaseManager
 	}
 	
 	/**
-	 * @param YandexEMailEntity $email
+	 * @param EMailEntity $email
 	 *
 	 * @return mixed|\Psr\Http\Message\ResponseInterface
 	 */
-	public function setEmail(YandexEMailEntity $email)
+	public function setEmail(EMailEntity $email)
 	{
 		$query = $email->setDomain($this->domain)->serialize();
 		return $this->postQuery(sprintf("%s/edit", self::HOST), $query);

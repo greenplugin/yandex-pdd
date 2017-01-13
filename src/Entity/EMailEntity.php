@@ -9,10 +9,10 @@
 namespace YandexPDD\Entity;
 
 /**
- * Class YandexEMailEntity
+ * Class EMailEntity
  * @package YandexPDD\Entity
  */
-class YandexEMailEntity implements SerializableInterface
+class EMailEntity implements SerializableInterface
 {
 	
 	const
@@ -86,7 +86,7 @@ class YandexEMailEntity implements SerializableInterface
 	/**
 	 * @param null|string $domain
 	 *
-	 * @return YandexEMailEntity
+	 * @return EMailEntity
 	 */
 	public function setDomain($domain)
 	{
@@ -106,7 +106,7 @@ class YandexEMailEntity implements SerializableInterface
 	/**
 	 * @param string $login
 	 *
-	 * @return YandexEMailEntity
+	 * @return EMailEntity
 	 */
 	public function setLogin($login)
 	{
@@ -126,7 +126,7 @@ class YandexEMailEntity implements SerializableInterface
 	/**
 	 * @param int|null $uid
 	 *
-	 * @return YandexEMailEntity
+	 * @return EMailEntity
 	 */
 	public function setUid($uid)
 	{
@@ -146,7 +146,7 @@ class YandexEMailEntity implements SerializableInterface
 	/**
 	 * @param string $password
 	 *
-	 * @return YandexEMailEntity;
+	 * @return EMailEntity;
  */
 	public function setPassword($password)
 	{
@@ -165,7 +165,7 @@ class YandexEMailEntity implements SerializableInterface
 	/**
 	 * @param string $iname
 	 *
-	 * @return YandexEMailEntity
+	 * @return EMailEntity
 	 */
 	public function setIname($iname)
 	{
@@ -185,7 +185,7 @@ class YandexEMailEntity implements SerializableInterface
 	/**
 	 * @param string $fname
 	 *
-	 * @return YandexEMailEntity
+	 * @return EMailEntity
 	 */
 	public function setFname($fname)
 	{
@@ -205,7 +205,7 @@ class YandexEMailEntity implements SerializableInterface
 	/**
 	 * @param string $enabled
 	 *
-	 * @return YandexEMailEntity
+	 * @return EMailEntity
 	 */
 	public function setEnabled($enabled)
 	{
@@ -225,7 +225,7 @@ class YandexEMailEntity implements SerializableInterface
 	/**
 	 * @param string $birthDate
 	 *
-	 * @return YandexEMailEntity
+	 * @return EMailEntity
 	 */
 	public function setBirthDate($birthDate)
 	{
@@ -245,7 +245,7 @@ class YandexEMailEntity implements SerializableInterface
 	/**
 	 * @param int $sex
 	 *
-	 * @return YandexEMailEntity
+	 * @return EMailEntity
 	 */
 	public function setSex($sex)
 	{
@@ -265,7 +265,7 @@ class YandexEMailEntity implements SerializableInterface
 	/**
 	 * @param null|string $hintq
 	 *
-	 * @return YandexEMailEntity
+	 * @return EMailEntity
 	 */
 	public function setHintq($hintq)
 	{
@@ -285,7 +285,7 @@ class YandexEMailEntity implements SerializableInterface
 	/**
 	 * @param null|string $hinta
 	 *
-	 * @return YandexEMailEntity
+	 * @return EMailEntity
 	 */
 	public function setHinta($hinta)
 	{

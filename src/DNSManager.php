@@ -8,65 +8,82 @@
 
 namespace YandexPDD;
 
-class DNSManager extends BaseManager
+use YandexPDD\Entity\DNSCollectionResponse;
+use YandexPDD\Entity\DNSRecordEntity;
+use YandexPDD\Entity\DNSRecordItem;
+use YandexPDD\Entity\DNSRecordResponse;
+
+class DNSManager extends AbstractBaseManager
 {
-	// TODO [GreenPlugin]: fill all responses to self;
+	// TODO [GreenPlugin]: add persistent collections an flush method;
 	const HOST = 'https://pddimp.yandex.ru/api2/admin/dns';
 		
 	/**
-	 * @return mixed|\Psr\Http\Message\ResponseInterface.
+	 * @return null|DNSCollectionResponse
 	 */
 	public function getRecords()
 	{
-		return $this->getQuery(sprintf("%s/list?domain=%s", self::HOST, $this->domain));
+		return $this->getQuery(
+			sprintf("%s/list?domain=%s", self::HOST, $this->domain),
+			new DNSCollectionResponse()
+		);
 	}
 	
 	/**
-	 * @param YandexDnsRecordEntity $recordEntity
+	 * @param DNSRecordEntity $recordEntity
 	 *
 	 * @return mixed|\Psr\Http\Message\ResponseInterface
 	 */
-	public function createRecord(YandexDnsRecordEntity $recordEntity)
+	public function createRecord(DNSRecordEntity $recordEntity)
 	{
 		$query = $recordEntity->setDomain($this->domain)->serialize();
-		
-		return $this->postQuery(sprintf("%s/add", self::HOST), $query);
+		return $this->postQuery(sprintf("%s/add", self::HOST), $query, new DNSRecordResponse());
 	}
 	
 	/**
-	 * @param YandexDnsRecordEntity $recordEntity
+	 * @param DNSRecordEntity $recordEntity
 	 *
 	 * @return mixed|\Psr\Http\Message\ResponseInterface
 	 */
-	public function updateRecord(YandexDnsRecordEntity $recordEntity)
+	public function updateRecord(DNSRecordEntity $recordEntity)
 	{
+		// TODO [GreenPlugin]: add update by exist record
 		$query = $recordEntity->setDomain($this->domain)->serialize();
 		
-		return $this->postQuery(sprintf("%s/edit", self::HOST), $query);
-	}
-	
-	public function removeRecord($recordId)
-	{
-		return $this->postQuery(sprintf("%s/del", self::HOST), [
-			'domain' => $this->domain,
-			'record_id' => $recordId
-		]);
+		return $this->postQuery(sprintf("%s/edit", self::HOST), $query, new DNSRecordResponse());
 	}
 	
 	/**
-	 * @param $record
-	 * @param $value
-	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 * @param DNSRecordItem $record
+	 *
+	 * @return mixed|null
 	 */
-	public function editRecordLegacy($record, $value)
+	public function removeRecord($record)
 	{
+		// TODO [GreenPlugin]: add removing by id
 		return $this->postQuery(
-			sprintf("%s/edit", self::HOST),
+			sprintf("%s/del", self::HOST),
 			[
 				'domain'    => $this->domain,
-				'record_id' => $record,
-				'content'   => $value,
+				'record_id' => $record->getRecordId(),
 			]
+			, new DNSRecordResponse()
 		);
+	}
+	
+	/**
+	 * @return DNSRecordEntity
+	 */
+	public function getNewRecord()
+	{
+		$record = new DNSRecordEntity();
+		return $record->setDomain($this->domain);
+	}
+	/**
+	 * @return null|DNSCollectionResponse
+	 */
+	public function getResponse()
+	{
+		return $this->response;
 	}
 }
