@@ -28,7 +28,7 @@ Abstract class AbstractYandexResponse implements FillableInterface
 	}
 	
 	/**
-	 * @return string
+	 * @return bool
 	 */
 	public function isSuccess()
 	{

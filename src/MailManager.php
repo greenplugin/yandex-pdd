@@ -10,7 +10,7 @@ namespace YandexPDD;
 
 use YandexPDD\Entity\EMailEntity;
 
-class MailManager extends  BaseManager
+class MailManager extends  AbstractBaseManager
 {
 	// TODO [GreenPlugin]: fill all responses to self;
 	const HOST = 'https://pddimp.yandex.ru/api2/admin/email';
@@ -89,6 +89,13 @@ class MailManager extends  BaseManager
 			                       $id
 		                       ));
 	}
-		
 	
+	
+	/**
+	 * @return null|mixed
+	 */
+	public function getResponse()
+	{
+		return $this->response;
+	}
 }

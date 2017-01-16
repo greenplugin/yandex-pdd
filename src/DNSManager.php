@@ -79,6 +79,7 @@ class DNSManager extends AbstractBaseManager
 		$record = new DNSRecordEntity();
 		return $record->setDomain($this->domain);
 	}
+	
 	/**
 	 * @return null|DNSCollectionResponse
 	 */
