@@ -26,6 +26,5 @@
         "psr-4": {
             "YandexPDD\\Tests\\": "tests/"
         }
-    },
-    "minimum-stability": "RC"
+    }
 }
