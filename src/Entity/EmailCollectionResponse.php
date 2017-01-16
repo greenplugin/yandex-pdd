@@ -8,7 +8,10 @@
 
 namespace YandexPDD\Entity;
 
-
+/**
+ * Class EmailCollectionResponse
+ * @package YandexPDD\Entity
+ */
 class EmailCollectionResponse extends AbstractYandexResponse
 {
     /**
@@ -20,8 +23,7 @@ class EmailCollectionResponse extends AbstractYandexResponse
      * @var integer
      */
     protected $page = null;
-
-
+	
     /**
      * @var integer
      */
@@ -36,15 +38,14 @@ class EmailCollectionResponse extends AbstractYandexResponse
      * @var integer
      */
     protected $total = null;
-
-
+	
     /**
      * @var integer
      */
     protected $found = null;
 
     /**
-     * @param Object|array $data
+     * @param object|array $data
      *
      * @return EmailCollectionResponse
      */
